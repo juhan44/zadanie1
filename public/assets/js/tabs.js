@@ -40,7 +40,7 @@ $.extend( $.ui, {
 		END: 35,
 		ENTER: 13,
 		ESCAPE: 27,
-		HOME: 36,
+		index: 36,
 		LEFT: 37,
 		PAGE_DOWN: 34,
 		PAGE_UP: 33,
@@ -91,7 +91,7 @@ $.fn.extend({
 });
 
 // selectors
-function focusable( element, isTabIndexNotNaN ) {
+function focusable( element, isTabindexNotNaN ) {
 	var map, mapName, img,
 		nodeName = element.nodeName.toLowerCase();
 	if ( "area" === nodeName ) {
@@ -106,8 +106,8 @@ function focusable( element, isTabIndexNotNaN ) {
 	return ( /input|select|textarea|button|object/.test( nodeName ) ?
 		!element.disabled :
 		"a" === nodeName ?
-			element.href || isTabIndexNotNaN :
-			isTabIndexNotNaN) &&
+			element.href || isTabindexNotNaN :
+			isTabindexNotNaN) &&
 		// the element and all of its ancestors must be visible
 		visible( element );
 }
@@ -136,9 +136,9 @@ $.extend( $.expr[ ":" ], {
 	},
 
 	tabbable: function( element ) {
-		var tabIndex = $.attr( element, "tabindex" ),
-			isTabIndexNaN = isNaN( tabIndex );
-		return ( isTabIndexNaN || tabIndex >= 0 ) && focusable( element, !isTabIndexNaN );
+		var tabindex = $.attr( element, "tabindex" ),
+			isTabindexNaN = isNaN( tabindex );
+		return ( isTabindexNaN || tabindex >= 0 ) && focusable( element, !isTabindexNaN );
 	}
 });
 
@@ -247,9 +247,9 @@ $.fn.extend({
 		return this.unbind( ".ui-disableSelection" );
 	},
 
-	zIndex: function( zIndex ) {
-		if ( zIndex !== undefined ) {
-			return this.css( "zIndex", zIndex );
+	zindex: function( zindex ) {
+		if ( zindex !== undefined ) {
+			return this.css( "zindex", zindex );
 		}
 
 		if ( this.length ) {
@@ -260,11 +260,11 @@ $.fn.extend({
 				// WebKit always returns auto if the element is positioned
 				position = elem.css( "position" );
 				if ( position === "absolute" || position === "relative" || position === "fixed" ) {
-					// IE returns 0 when zIndex is not specified
+					// IE returns 0 when zindex is not specified
 					// other browsers return a string
 					// we ignore the case of nested elements with an explicit value of 0
 					// <div style="z-index: -10;"><div style="z-index: 0;"></div></div>
-					value = parseInt( elem.css( "zIndex" ), 10 );
+					value = parseInt( elem.css( "zindex" ), 10 );
 					if ( !isNaN( value ) && value !== 0 ) {
 						return value;
 					}
@@ -459,14 +459,14 @@ $.widget = function( name, base, prototype ) {
 
 $.widget.extend = function( target ) {
 	var input = widget_slice.call( arguments, 1 ),
-		inputIndex = 0,
+		inputindex = 0,
 		inputLength = input.length,
 		key,
 		value;
-	for ( ; inputIndex < inputLength; inputIndex++ ) {
-		for ( key in input[ inputIndex ] ) {
-			value = input[ inputIndex ][ key ];
-			if ( input[ inputIndex ].hasOwnProperty( key ) && value !== undefined ) {
+	for ( ; inputindex < inputLength; inputindex++ ) {
+		for ( key in input[ inputindex ] ) {
+			value = input[ inputindex ][ key ];
+			if ( input[ inputindex ].hasOwnProperty( key ) && value !== undefined ) {
 				// Clone objects
 				if ( $.isPlainObject( value ) ) {
 					target[ key ] = $.isPlainObject( target[ key ] ) ?
@@ -1658,7 +1658,7 @@ var accordion = $.widget( "ui.accordion", {
 			.removeAttr( "aria-expanded" )
 			.removeAttr( "aria-selected" )
 			.removeAttr( "aria-controls" )
-			.removeAttr( "tabIndex" )
+			.removeAttr( "tabindex" )
 			.removeUniqueId();
 
 		this._destroyIcons();
@@ -1724,23 +1724,23 @@ var accordion = $.widget( "ui.accordion", {
 
 		var keyCode = $.ui.keyCode,
 			length = this.headers.length,
-			currentIndex = this.headers.index( event.target ),
+			currentindex = this.headers.index( event.target ),
 			toFocus = false;
 
 		switch ( event.keyCode ) {
 			case keyCode.RIGHT:
 			case keyCode.DOWN:
-				toFocus = this.headers[ ( currentIndex + 1 ) % length ];
+				toFocus = this.headers[ ( currentindex + 1 ) % length ];
 				break;
 			case keyCode.LEFT:
 			case keyCode.UP:
-				toFocus = this.headers[ ( currentIndex - 1 + length ) % length ];
+				toFocus = this.headers[ ( currentindex - 1 + length ) % length ];
 				break;
 			case keyCode.SPACE:
 			case keyCode.ENTER:
 				this._eventHandler( event );
 				break;
-			case keyCode.HOME:
+			case keyCode.index:
 				toFocus = this.headers[ 0 ];
 				break;
 			case keyCode.END:
@@ -1749,8 +1749,8 @@ var accordion = $.widget( "ui.accordion", {
 		}
 
 		if ( toFocus ) {
-			$( event.target ).attr( "tabIndex", -1 );
-			$( toFocus ).attr( "tabIndex", 0 );
+			$( event.target ).attr( "tabindex", -1 );
+			$( toFocus ).attr( "tabindex", 0 );
 			toFocus.focus();
 			event.preventDefault();
 		}
@@ -1844,7 +1844,7 @@ var accordion = $.widget( "ui.accordion", {
 			.attr({
 				"aria-selected": "false",
 				"aria-expanded": "false",
-				tabIndex: -1
+				tabindex: -1
 			})
 			.next()
 				.attr({
@@ -1854,12 +1854,12 @@ var accordion = $.widget( "ui.accordion", {
 
 		// make sure at least one header is in the tab order
 		if ( !this.active.length ) {
-			this.headers.eq( 0 ).attr( "tabIndex", 0 );
+			this.headers.eq( 0 ).attr( "tabindex", 0 );
 		} else {
 			this.active.attr({
 				"aria-selected": "true",
 				"aria-expanded": "true",
-				tabIndex: 0
+				tabindex: 0
 			})
 			.next()
 				.attr({
@@ -2025,14 +2025,14 @@ var accordion = $.widget( "ui.accordion", {
 		// if we're collapsing, then keep the collapsing header in the tab order
 		if ( toShow.length && toHide.length ) {
 			toHide.prev().attr({
-				"tabIndex": -1,
+				"tabindex": -1,
 				"aria-expanded": "false"
 			});
 		} else if ( toShow.length ) {
 			this.headers.filter(function() {
-				return $( this ).attr( "tabIndex" ) === 0;
+				return $( this ).attr( "tabindex" ) === 0;
 			})
-			.attr( "tabIndex", -1 );
+			.attr( "tabindex", -1 );
 		}
 
 		toShow
@@ -2040,7 +2040,7 @@ var accordion = $.widget( "ui.accordion", {
 			.prev()
 				.attr({
 					"aria-selected": "true",
-					tabIndex: 0,
+					tabindex: 0,
 					"aria-expanded": "true"
 				});
 	},
@@ -2164,7 +2164,7 @@ var menu = $.widget( "ui.menu", {
 			.toggleClass( "ui-menu-icons", !!this.element.find( ".ui-icon" ).length )
 			.attr({
 				role: this.options.role,
-				tabIndex: 0
+				tabindex: 0
 			});
 
 		if ( this.options.disabled ) {
@@ -2261,7 +2261,7 @@ var menu = $.widget( "ui.menu", {
 			.find( ".ui-menu" ).addBack()
 				.removeClass( "ui-menu ui-widget ui-widget-content ui-menu-icons ui-front" )
 				.removeAttr( "role" )
-				.removeAttr( "tabIndex" )
+				.removeAttr( "tabindex" )
 				.removeAttr( "aria-labelledby" )
 				.removeAttr( "aria-expanded" )
 				.removeAttr( "aria-hidden" )
@@ -2276,7 +2276,7 @@ var menu = $.widget( "ui.menu", {
 			.removeAttr( "aria-disabled" )
 			.removeUniqueId()
 			.removeClass( "ui-state-hover" )
-			.removeAttr( "tabIndex" )
+			.removeAttr( "tabindex" )
 			.removeAttr( "role" )
 			.removeAttr( "aria-haspopup" )
 			.children().each( function() {
@@ -2301,7 +2301,7 @@ var menu = $.widget( "ui.menu", {
 		case $.ui.keyCode.PAGE_DOWN:
 			this.nextPage( event );
 			break;
-		case $.ui.keyCode.HOME:
+		case $.ui.keyCode.index:
 			this._move( "first", "first", event );
 			break;
 		case $.ui.keyCode.END:
@@ -2426,7 +2426,7 @@ var menu = $.widget( "ui.menu", {
 			.addClass( "ui-menu-item" )
 			.uniqueId()
 			.attr({
-				tabIndex: -1,
+				tabindex: -1,
 				role: this._itemRole()
 			});
 
@@ -2786,7 +2786,7 @@ $.widget( "ui.autocomplete", {
 		select: null
 	},
 
-	requestIndex: 0,
+	requestindex: 0,
 	pending: 0,
 
 	_create: function() {
@@ -3170,10 +3170,10 @@ $.widget( "ui.autocomplete", {
 	},
 
 	_response: function() {
-		var index = ++this.requestIndex;
+		var index = ++this.requestindex;
 
 		return $.proxy(function( content ) {
-			if ( index === this.requestIndex ) {
+			if ( index === this.requestindex ) {
 				this.__response( content );
 			}
 
@@ -3782,11 +3782,11 @@ function datepicker_getZindex( elem ) {
 		// WebKit always returns auto if the element is positioned
 		position = elem.css( "position" );
 		if ( position === "absolute" || position === "relative" || position === "fixed" ) {
-			// IE returns 0 when zIndex is not specified
+			// IE returns 0 when zindex is not specified
 			// other browsers return a string
 			// we ignore the case of nested elements with an explicit value of 0
 			// <div style="z-index: -10;"><div style="z-index: 0;"></div></div>
-			value = parseInt( elem.css( "zIndex" ), 10 );
+			value = parseInt( elem.css( "zindex" ), 10 );
 			if ( !isNaN( value ) && value !== 0 ) {
 				return value;
 			}
@@ -4371,7 +4371,7 @@ $.extend(Datepicker.prototype, {
 							$.datepicker._gotoToday(event.target);
 						}
 						handled = event.ctrlKey || event.metaKey;
-						break; // current on ctrl or command +home
+						break; // current on ctrl or command +index
 				case 37: if (event.ctrlKey || event.metaKey) {
 							$.datepicker._adjustDate(event.target, (isRTL ? +1 : -1), "D");
 						}
@@ -4408,7 +4408,7 @@ $.extend(Datepicker.prototype, {
 						break; // +1 week on ctrl or command +down
 				default: handled = false;
 			}
-		} else if (event.keyCode === 36 && event.ctrlKey) { // display the date picker on ctrl+home
+		} else if (event.keyCode === 36 && event.ctrlKey) { // display the date picker on ctrl+index
 			$.datepicker._showDatepicker(this);
 		} else {
 			handled = false;
@@ -4739,7 +4739,7 @@ $.extend(Datepicker.prototype, {
 
 		inst["selected" + (period === "M" ? "Month" : "Year")] =
 		inst["draw" + (period === "M" ? "Month" : "Year")] =
-			parseInt(select.options[select.selectedIndex].value,10);
+			parseInt(select.options[select.selectedindex].value,10);
 
 		this._notifyChange(inst);
 		this._adjustDate(target);
@@ -5864,7 +5864,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 		snapMode: "both",
 		snapTolerance: 20,
 		stack: false,
-		zIndex: false,
+		zindex: false,
 
 		// callbacks
 		drag: null,
@@ -6903,34 +6903,34 @@ $.ui.plugin.add("draggable", "stack", {
 		var min,
 			o = instance.options,
 			group = $.makeArray($(o.stack)).sort(function(a, b) {
-				return (parseInt($(a).css("zIndex"), 10) || 0) - (parseInt($(b).css("zIndex"), 10) || 0);
+				return (parseInt($(a).css("zindex"), 10) || 0) - (parseInt($(b).css("zindex"), 10) || 0);
 			});
 
 		if (!group.length) { return; }
 
-		min = parseInt($(group[0]).css("zIndex"), 10) || 0;
+		min = parseInt($(group[0]).css("zindex"), 10) || 0;
 		$(group).each(function(i) {
-			$(this).css("zIndex", min + i);
+			$(this).css("zindex", min + i);
 		});
-		this.css("zIndex", (min + group.length));
+		this.css("zindex", (min + group.length));
 	}
 });
 
-$.ui.plugin.add("draggable", "zIndex", {
+$.ui.plugin.add("draggable", "zindex", {
 	start: function( event, ui, instance ) {
 		var t = $( ui.helper ),
 			o = instance.options;
 
-		if (t.css("zIndex")) {
-			o._zIndex = t.css("zIndex");
+		if (t.css("zindex")) {
+			o._zindex = t.css("zindex");
 		}
-		t.css("zIndex", o.zIndex);
+		t.css("zindex", o.zindex);
 	},
 	stop: function( event, ui, instance ) {
 		var o = instance.options;
 
-		if (o._zIndex) {
-			$(ui.helper).css("zIndex", o._zIndex);
+		if (o._zindex) {
+			$(ui.helper).css("zindex", o._zindex);
 		}
 	}
 });
@@ -6970,7 +6970,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 		minHeight: 10,
 		minWidth: 10,
 		// See #7960
-		zIndex: 90,
+		zindex: 90,
 
 		// callbacks
 		resize: null,
@@ -7100,7 +7100,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 				hname = "ui-resizable-" + handle;
 				axis = $("<div class='ui-resizable-handle " + hname + "'></div>");
 
-				axis.css({ zIndex: o.zIndex });
+				axis.css({ zindex: o.zindex });
 
 				// TODO : What's going on here?
 				if ("se" === handle) {
@@ -7610,7 +7610,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 				position: "absolute",
 				left: this.elementOffset.left + "px",
 				top: this.elementOffset.top + "px",
-				zIndex: ++o.zIndex //TODO: Don't modify option
+				zindex: ++o.zindex //TODO: Don't modify option
 			});
 
 			this.helper
@@ -8316,10 +8316,10 @@ var dialog = $.widget( "ui.dialog", {
 			zIndicies = this.uiDialog.siblings( ".ui-front:visible" ).map(function() {
 				return +$( this ).css( "z-index" );
 			}).get(),
-			zIndexMax = Math.max.apply( null, zIndicies );
+			zindexMax = Math.max.apply( null, zIndicies );
 
-		if ( zIndexMax >= +this.uiDialog.css( "z-index" ) ) {
-			this.uiDialog.css( "z-index", zIndexMax + 1 );
+		if ( zindexMax >= +this.uiDialog.css( "z-index" ) ) {
+			this.uiDialog.css( "z-index", zindexMax + 1 );
 			moved = true;
 		}
 
@@ -8416,8 +8416,8 @@ var dialog = $.widget( "ui.dialog", {
 				this.options.dialogClass )
 			.hide()
 			.attr({
-				// Setting tabIndex makes the div focusable
-				tabIndex: -1,
+				// Setting tabindex makes the div focusable
+				tabindex: -1,
 				role: "dialog"
 			})
 			.appendTo( this._appendTo() );
@@ -10365,7 +10365,7 @@ $.extend( $.effects, {
 		} else {
 			$.extend( props, {
 				position: element.css( "position" ),
-				zIndex: element.css( "z-index" )
+				zindex: element.css( "z-index" )
 			});
 			$.each([ "top", "left", "bottom", "right" ], function(i, pos) {
 				props[ pos ] = element.css( pos );
@@ -12336,13 +12336,13 @@ var selectmenu = $.widget( "ui.selectmenu", {
 					var item = ui.item.data( "ui-selectmenu-item" );
 
 					// Prevent inital focus from firing and check if its a newly focused item
-					if ( that.focusIndex != null && item.index !== that.focusIndex ) {
+					if ( that.focusindex != null && item.index !== that.focusindex ) {
 						that._trigger( "focus", event, { item: item } );
 						if ( !that.isOpen ) {
 							that._select( item, event );
 						}
 					}
-					that.focusIndex = item.index;
+					that.focusindex = item.index;
 
 					that.button.attr( "aria-activedescendant",
 						that.menuItems.eq( item.index ).attr( "id" ) );
@@ -12504,9 +12504,9 @@ var selectmenu = $.widget( "ui.selectmenu", {
 			filter = ".ui-menu-item";
 
 		if ( this.isOpen ) {
-			item = this.menuItems.eq( this.focusIndex );
+			item = this.menuItems.eq( this.focusindex );
 		} else {
-			item = this.menuItems.eq( this.element[ 0 ].selectedIndex );
+			item = this.menuItems.eq( this.element[ 0 ].selectedindex );
 			filter += ":not(.ui-state-disabled)";
 		}
 
@@ -12522,7 +12522,7 @@ var selectmenu = $.widget( "ui.selectmenu", {
 	},
 
 	_getSelectedItem: function() {
-		return this.menuItems.eq( this.element[ 0 ].selectedIndex );
+		return this.menuItems.eq( this.element[ 0 ].selectedindex );
 	},
 
 	_toggle: function( event ) {
@@ -12627,7 +12627,7 @@ var selectmenu = $.widget( "ui.selectmenu", {
 				case $.ui.keyCode.RIGHT:
 					this._move( "next", event );
 					break;
-				case $.ui.keyCode.HOME:
+				case $.ui.keyCode.index:
 				case $.ui.keyCode.PAGE_UP:
 					this._move( "first", event );
 					break;
@@ -12647,22 +12647,22 @@ var selectmenu = $.widget( "ui.selectmenu", {
 	},
 
 	_selectFocusedItem: function( event ) {
-		var item = this.menuItems.eq( this.focusIndex );
+		var item = this.menuItems.eq( this.focusindex );
 		if ( !item.hasClass( "ui-state-disabled" ) ) {
 			this._select( item.data( "ui-selectmenu-item" ), event );
 		}
 	},
 
 	_select: function( item, event ) {
-		var oldIndex = this.element[ 0 ].selectedIndex;
+		var oldindex = this.element[ 0 ].selectedindex;
 
 		// Change native select element
-		this.element[ 0 ].selectedIndex = item.index;
+		this.element[ 0 ].selectedindex = item.index;
 		this._setText( this.buttonText, item.label );
 		this._setAria( item );
 		this._trigger( "select", event, { item: item } );
 
-		if ( item.index !== oldIndex ) {
+		if ( item.index !== oldindex ) {
 			this._trigger( "change", event, { item: item } );
 		}
 
@@ -12836,7 +12836,7 @@ var slider = $.widget( "ui.slider", $.ui.mouse, {
 		this._keySliding = false;
 		this._mouseSliding = false;
 		this._animateOff = true;
-		this._handleIndex = null;
+		this._handleindex = null;
 		this._detectOrientation();
 		this._mouseInit();
 		this._calculateNewMax();
@@ -12989,7 +12989,7 @@ var slider = $.widget( "ui.slider", $.ui.mouse, {
 		}
 		this._mouseSliding = true;
 
-		this._handleIndex = index;
+		this._handleindex = index;
 
 		closestHandle
 			.addClass( "ui-state-active" )
@@ -13021,7 +13021,7 @@ var slider = $.widget( "ui.slider", $.ui.mouse, {
 		var position = { x: event.pageX, y: event.pageY },
 			normValue = this._normValueFromMouse( position );
 
-		this._slide( event, this._handleIndex, normValue );
+		this._slide( event, this._handleindex, normValue );
 
 		return false;
 	},
@@ -13030,10 +13030,10 @@ var slider = $.widget( "ui.slider", $.ui.mouse, {
 		this.handles.removeClass( "ui-state-active" );
 		this._mouseSliding = false;
 
-		this._stop( event, this._handleIndex );
-		this._change( event, this._handleIndex );
+		this._stop( event, this._handleindex );
+		this._change( event, this._handleindex );
 
-		this._handleIndex = null;
+		this._handleindex = null;
 		this._clickOffset = null;
 		this._animateOff = false;
 
@@ -13403,7 +13403,7 @@ var slider = $.widget( "ui.slider", $.ui.mouse, {
 				index = $( event.target ).data( "ui-slider-handle-index" );
 
 			switch ( event.keyCode ) {
-				case $.ui.keyCode.HOME:
+				case $.ui.keyCode.index:
 				case $.ui.keyCode.END:
 				case $.ui.keyCode.PAGE_UP:
 				case $.ui.keyCode.PAGE_DOWN:
@@ -13431,7 +13431,7 @@ var slider = $.widget( "ui.slider", $.ui.mouse, {
 			}
 
 			switch ( event.keyCode ) {
-				case $.ui.keyCode.HOME:
+				case $.ui.keyCode.index:
 					newVal = this._valueMin();
 					break;
 				case $.ui.keyCode.END:
@@ -13516,7 +13516,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 		scrollSpeed: 20,
 		scope: "default",
 		tolerance: "intersect",
-		zIndex: 1000,
+		zindex: 1000,
 
 		// callbacks
 		activate: null,
@@ -13733,11 +13733,11 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 			this.helper.css("opacity", o.opacity);
 		}
 
-		if(o.zIndex) { // zIndex option
-			if (this.helper.css("zIndex")) {
-				this._storedZIndex = this.helper.css("zIndex");
+		if(o.zindex) { // zindex option
+			if (this.helper.css("zindex")) {
+				this._storedZindex = this.helper.css("zindex");
 			}
-			this.helper.css("zIndex", o.zIndex);
+			this.helper.css("zindex", o.zindex);
 		}
 
 		//Prepare scrolling
@@ -14298,7 +14298,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 	_contactContainers: function(event) {
 		var i, j, dist, itemWithLeastDistance, posProperty, sizeProperty, cur, nearBottom, floating, axis,
 			innermostContainer = null,
-			innermostIndex = null;
+			innermostindex = null;
 
 		// get innermost container that intersects with item
 		for (i = this.containers.length - 1; i >= 0; i--) {
@@ -14316,7 +14316,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 				}
 
 				innermostContainer = this.containers[i];
-				innermostIndex = i;
+				innermostindex = i;
 
 			} else {
 				// container doesn't intersect. trigger "out" event if necessary
@@ -14335,9 +14335,9 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 
 		// move the item into the container if it's not there already
 		if(this.containers.length === 1) {
-			if (!this.containers[innermostIndex].containerCache.over) {
-				this.containers[innermostIndex]._trigger("over", event, this._uiHash(this));
-				this.containers[innermostIndex].containerCache.over = 1;
+			if (!this.containers[innermostindex].containerCache.over) {
+				this.containers[innermostindex]._trigger("over", event, this._uiHash(this));
+				this.containers[innermostindex].containerCache.over = 1;
 			}
 		} else {
 
@@ -14350,7 +14350,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 			axis = floating ? "clientX" : "clientY";
 
 			for (j = this.items.length - 1; j >= 0; j--) {
-				if(!$.contains(this.containers[innermostIndex].element[0], this.items[j].item[0])) {
+				if(!$.contains(this.containers[innermostindex].element[0], this.items[j].item[0])) {
 					continue;
 				}
 				if(this.items[j].item[0] === this.currentItem[0]) {
@@ -14375,24 +14375,24 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 				return;
 			}
 
-			if(this.currentContainer === this.containers[innermostIndex]) {
+			if(this.currentContainer === this.containers[innermostindex]) {
 				if ( !this.currentContainer.containerCache.over ) {
-					this.containers[ innermostIndex ]._trigger( "over", event, this._uiHash() );
+					this.containers[ innermostindex ]._trigger( "over", event, this._uiHash() );
 					this.currentContainer.containerCache.over = 1;
 				}
 				return;
 			}
 
-			itemWithLeastDistance ? this._rearrange(event, itemWithLeastDistance, null, true) : this._rearrange(event, null, this.containers[innermostIndex].element, true);
+			itemWithLeastDistance ? this._rearrange(event, itemWithLeastDistance, null, true) : this._rearrange(event, null, this.containers[innermostindex].element, true);
 			this._trigger("change", event, this._uiHash());
-			this.containers[innermostIndex]._trigger("change", event, this._uiHash(this));
-			this.currentContainer = this.containers[innermostIndex];
+			this.containers[innermostindex]._trigger("change", event, this._uiHash(this));
+			this.currentContainer = this.containers[innermostindex];
 
 			//Update the placeholder
 			this.options.placeholder.update(this.currentContainer, this.placeholder);
 
-			this.containers[innermostIndex]._trigger("over", event, this._uiHash(this));
-			this.containers[innermostIndex].containerCache.over = 1;
+			this.containers[innermostindex]._trigger("over", event, this._uiHash(this));
+			this.containers[innermostindex].containerCache.over = 1;
 		}
 
 
@@ -14713,8 +14713,8 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 		if(this._storedOpacity) {
 			this.helper.css("opacity", this._storedOpacity);
 		}
-		if(this._storedZIndex) {
-			this.helper.css("zIndex", this._storedZIndex === "auto" ? "" : this._storedZIndex);
+		if(this._storedZindex) {
+			this.helper.css("zindex", this._storedZindex === "auto" ? "" : this._storedZindex);
 		}
 
 		this.dragging = false;
@@ -14968,7 +14968,7 @@ var spinner = $.widget( "ui.spinner", {
 
 		// button bindings
 		this.buttons = uiSpinner.find( ".ui-spinner-button" )
-			.attr( "tabIndex", -1 )
+			.attr( "tabindex", -1 )
 			.button()
 			.removeClass( "ui-corner-all" );
 
@@ -15410,7 +15410,7 @@ var tabs = $.widget( "ui.tabs", {
 
 	_tabKeydown: function( event ) {
 		var focusedTab = $( this.document[0].activeElement ).closest( "li" ),
-			selectedIndex = this.tabs.index( focusedTab ),
+			selectedindex = this.tabs.index( focusedTab ),
 			goingForward = true;
 
 		if ( this._handlePageNav( event ) ) {
@@ -15420,31 +15420,31 @@ var tabs = $.widget( "ui.tabs", {
 		switch ( event.keyCode ) {
 			case $.ui.keyCode.RIGHT:
 			case $.ui.keyCode.DOWN:
-				selectedIndex++;
+				selectedindex++;
 				break;
 			case $.ui.keyCode.UP:
 			case $.ui.keyCode.LEFT:
 				goingForward = false;
-				selectedIndex--;
+				selectedindex--;
 				break;
 			case $.ui.keyCode.END:
-				selectedIndex = this.anchors.length - 1;
+				selectedindex = this.anchors.length - 1;
 				break;
-			case $.ui.keyCode.HOME:
-				selectedIndex = 0;
+			case $.ui.keyCode.index:
+				selectedindex = 0;
 				break;
 			case $.ui.keyCode.SPACE:
 				// Activate only, no collapsing
 				event.preventDefault();
 				clearTimeout( this.activating );
-				this._activate( selectedIndex );
+				this._activate( selectedindex );
 				return;
 			case $.ui.keyCode.ENTER:
 				// Toggle (cancel delayed activation, allow collapsing)
 				event.preventDefault();
 				clearTimeout( this.activating );
 				// Determine if we should collapse or activate
-				this._activate( selectedIndex === this.options.active ? false : selectedIndex );
+				this._activate( selectedindex === this.options.active ? false : selectedindex );
 				return;
 			default:
 				return;
@@ -15453,7 +15453,7 @@ var tabs = $.widget( "ui.tabs", {
 		// Focus the appropriate tab, based on which key was pressed
 		event.preventDefault();
 		clearTimeout( this.activating );
-		selectedIndex = this._focusNextTab( selectedIndex, goingForward );
+		selectedindex = this._focusNextTab( selectedindex, goingForward );
 
 		// Navigating with control key will prevent automatic activation
 		if ( !event.ctrlKey ) {
@@ -15461,10 +15461,10 @@ var tabs = $.widget( "ui.tabs", {
 			// Otherwise AT may confuse the user by stating that they need to activate the tab,
 			// but the tab will already be activated by the time the announcement finishes.
 			focusedTab.attr( "aria-selected", "false" );
-			this.tabs.eq( selectedIndex ).attr( "aria-selected", "true" );
+			this.tabs.eq( selectedindex ).attr( "aria-selected", "true" );
 
 			this.activating = this._delay(function() {
-				this.option( "active", selectedIndex );
+				this.option( "active", selectedindex );
 			}, this.delay );
 		}
 	},
@@ -15494,14 +15494,14 @@ var tabs = $.widget( "ui.tabs", {
 	},
 
 	_findNextTab: function( index, goingForward ) {
-		var lastTabIndex = this.tabs.length - 1;
+		var lastTabindex = this.tabs.length - 1;
 
 		function constrain() {
-			if ( index > lastTabIndex ) {
+			if ( index > lastTabindex ) {
 				index = 0;
 			}
 			if ( index < 0 ) {
-				index = lastTabIndex;
+				index = lastTabindex;
 			}
 			return index;
 		}
@@ -15598,7 +15598,7 @@ var tabs = $.widget( "ui.tabs", {
 		this.tabs.not( this.active ).attr({
 			"aria-selected": "false",
 			"aria-expanded": "false",
-			tabIndex: -1
+			tabindex: -1
 		});
 		this.panels.not( this._getPanelForTab( this.active ) )
 			.hide()
@@ -15608,14 +15608,14 @@ var tabs = $.widget( "ui.tabs", {
 
 		// Make sure one tab is in the tab order
 		if ( !this.active.length ) {
-			this.tabs.eq( 0 ).attr( "tabIndex", 0 );
+			this.tabs.eq( 0 ).attr( "tabindex", 0 );
 		} else {
 			this.active
 				.addClass( "ui-tabs-active ui-state-active" )
 				.attr({
 					"aria-selected": "true",
 					"aria-expanded": "true",
-					tabIndex: 0
+					tabindex: 0
 				});
 			this._getPanelForTab( this.active )
 				.show()
@@ -15658,7 +15658,7 @@ var tabs = $.widget( "ui.tabs", {
 			.addClass( "ui-state-default ui-corner-top" )
 			.attr({
 				role: "tab",
-				tabIndex: -1
+				tabindex: -1
 			});
 
 		this.anchors = this.tabs.map(function() {
@@ -15667,7 +15667,7 @@ var tabs = $.widget( "ui.tabs", {
 			.addClass( "ui-tabs-anchor" )
 			.attr({
 				role: "presentation",
-				tabIndex: -1
+				tabindex: -1
 			});
 
 		this.panels = $();
@@ -15909,19 +15909,19 @@ var tabs = $.widget( "ui.tabs", {
 		// If we're opening from collapsed state, remove the previous tab from the tab order.
 		// If we're collapsing, then keep the collapsing tab in the tab order.
 		if ( toShow.length && toHide.length ) {
-			eventData.oldTab.attr( "tabIndex", -1 );
+			eventData.oldTab.attr( "tabindex", -1 );
 		} else if ( toShow.length ) {
 			this.tabs.filter(function() {
-				return $( this ).attr( "tabIndex" ) === 0;
+				return $( this ).attr( "tabindex" ) === 0;
 			})
-			.attr( "tabIndex", -1 );
+			.attr( "tabindex", -1 );
 		}
 
 		toShow.attr( "aria-hidden", "false" );
 		eventData.newTab.attr({
 			"aria-selected": "true",
 			"aria-expanded": "true",
-			tabIndex: 0
+			tabindex: 0
 		});
 	},
 
@@ -15951,7 +15951,7 @@ var tabs = $.widget( "ui.tabs", {
 		return index === false ? $() : this.tabs.eq( index );
 	},
 
-	_getIndex: function( index ) {
+	_getindex: function( index ) {
 		// meta-function to give users option to provide a href string instead of a numerical index.
 		if ( typeof index === "string" ) {
 			index = this.anchors.index( this.anchors.filter( "[href$='" + index + "']" ) );
@@ -15974,7 +15974,7 @@ var tabs = $.widget( "ui.tabs", {
 		this.anchors
 			.removeClass( "ui-tabs-anchor" )
 			.removeAttr( "role" )
-			.removeAttr( "tabIndex" )
+			.removeAttr( "tabindex" )
 			.removeUniqueId();
 
 		this.tablist.unbind( this.eventNamespace );
@@ -15986,7 +15986,7 @@ var tabs = $.widget( "ui.tabs", {
 				$( this )
 					.removeClass( "ui-state-default ui-state-active ui-state-disabled " +
 						"ui-corner-top ui-corner-bottom ui-widget-content ui-tabs-active ui-tabs-panel" )
-					.removeAttr( "tabIndex" )
+					.removeAttr( "tabindex" )
 					.removeAttr( "aria-live" )
 					.removeAttr( "aria-busy" )
 					.removeAttr( "aria-selected" )
@@ -16025,7 +16025,7 @@ var tabs = $.widget( "ui.tabs", {
 		if ( index === undefined ) {
 			disabled = false;
 		} else {
-			index = this._getIndex( index );
+			index = this._getindex( index );
 			if ( $.isArray( disabled ) ) {
 				disabled = $.map( disabled, function( num ) {
 					return num !== index ? num : null;
@@ -16048,7 +16048,7 @@ var tabs = $.widget( "ui.tabs", {
 		if ( index === undefined ) {
 			disabled = true;
 		} else {
-			index = this._getIndex( index );
+			index = this._getindex( index );
 			if ( $.inArray( index, disabled ) !== -1 ) {
 				return;
 			}
@@ -16062,7 +16062,7 @@ var tabs = $.widget( "ui.tabs", {
 	},
 
 	load: function( index, event ) {
-		index = this._getIndex( index );
+		index = this._getindex( index );
 		var that = this,
 			tab = this.tabs.eq( index ),
 			anchor = tab.find( ".ui-tabs-anchor" ),

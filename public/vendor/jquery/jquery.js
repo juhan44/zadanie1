@@ -918,9 +918,9 @@ function addHandle( attrs, handler ) {
 function siblingCheck( a, b ) {
 	var cur = b && a,
 		diff = cur && a.nodeType === 1 && b.nodeType === 1 &&
-			a.sourceIndex - b.sourceIndex;
+			a.sourceindex - b.sourceindex;
 
-	// Use IE sourceIndex if available on both nodes
+	// Use IE sourceindex if available on both nodes
 	if ( diff ) {
 		return diff;
 	}
@@ -1024,12 +1024,12 @@ function createPositionalPseudo( fn ) {
 		argument = +argument;
 		return markFunction(function( seed, matches ) {
 			var j,
-				matchIndexes = fn( [], seed.length, argument ),
-				i = matchIndexes.length;
+				matchindexes = fn( [], seed.length, argument ),
+				i = matchindexes.length;
 
 			// Match elements found at the specified indexes
 			while ( i-- ) {
-				if ( seed[ (j = matchIndexes[i]) ] ) {
+				if ( seed[ (j = matchindexes[i]) ] ) {
 					seed[j] = !(matches[j] = seed[j]);
 				}
 			}
@@ -1762,7 +1762,7 @@ Expr = Sizzle.selectors = {
 				} :
 
 				function( elem, context, xml ) {
-					var cache, uniqueCache, outerCache, node, nodeIndex, start,
+					var cache, uniqueCache, outerCache, node, nodeindex, start,
 						dir = simple !== forward ? "nextSibling" : "previousSibling",
 						parent = elem.parentNode,
 						name = ofType && elem.nodeName.toLowerCase(),
@@ -1806,18 +1806,18 @@ Expr = Sizzle.selectors = {
 								(outerCache[ node.uniqueID ] = {});
 
 							cache = uniqueCache[ type ] || [];
-							nodeIndex = cache[ 0 ] === dirruns && cache[ 1 ];
-							diff = nodeIndex && cache[ 2 ];
-							node = nodeIndex && parent.childNodes[ nodeIndex ];
+							nodeindex = cache[ 0 ] === dirruns && cache[ 1 ];
+							diff = nodeindex && cache[ 2 ];
+							node = nodeindex && parent.childNodes[ nodeindex ];
 
-							while ( (node = ++nodeIndex && node && node[ dir ] ||
+							while ( (node = ++nodeindex && node && node[ dir ] ||
 
 								// Fallback to seeking `elem` from the start
-								(diff = nodeIndex = 0) || start.pop()) ) {
+								(diff = nodeindex = 0) || start.pop()) ) {
 
 								// When found, cache indexes on `parent` and break
 								if ( node.nodeType === 1 && ++diff && node === elem ) {
-									uniqueCache[ type ] = [ dirruns, nodeIndex, diff ];
+									uniqueCache[ type ] = [ dirruns, nodeindex, diff ];
 									break;
 								}
 							}
@@ -1835,16 +1835,16 @@ Expr = Sizzle.selectors = {
 									(outerCache[ node.uniqueID ] = {});
 
 								cache = uniqueCache[ type ] || [];
-								nodeIndex = cache[ 0 ] === dirruns && cache[ 1 ];
-								diff = nodeIndex;
+								nodeindex = cache[ 0 ] === dirruns && cache[ 1 ];
+								diff = nodeindex;
 							}
 
 							// xml :nth-child(...)
 							// or :nth-last-child(...) or :nth(-last)?-of-type(...)
 							if ( diff === false ) {
 								// Use the same loop as above to seek `elem` from the start
-								while ( (node = ++nodeIndex && node && node[ dir ] ||
-									(diff = nodeIndex = 0) || start.pop()) ) {
+								while ( (node = ++nodeindex && node && node[ dir ] ||
+									(diff = nodeindex = 0) || start.pop()) ) {
 
 									if ( ( ofType ?
 										node.nodeName.toLowerCase() === name :
@@ -2000,7 +2000,7 @@ Expr = Sizzle.selectors = {
 		},
 
 		"focus": function( elem ) {
-			return elem === document.activeElement && (!document.hasFocus || document.hasFocus()) && !!(elem.type || elem.href || ~elem.tabIndex);
+			return elem === document.activeElement && (!document.hasFocus || document.hasFocus()) && !!(elem.type || elem.href || ~elem.tabindex);
 		},
 
 		// Boolean properties
@@ -2018,7 +2018,7 @@ Expr = Sizzle.selectors = {
 			// Accessing this property makes selected-by-default
 			// options in Safari work properly
 			if ( elem.parentNode ) {
-				elem.parentNode.selectedIndex;
+				elem.parentNode.selectedindex;
 			}
 
 			return elem.selected === true;
@@ -2071,44 +2071,44 @@ Expr = Sizzle.selectors = {
 			return [ 0 ];
 		}),
 
-		"last": createPositionalPseudo(function( matchIndexes, length ) {
+		"last": createPositionalPseudo(function( matchindexes, length ) {
 			return [ length - 1 ];
 		}),
 
-		"eq": createPositionalPseudo(function( matchIndexes, length, argument ) {
+		"eq": createPositionalPseudo(function( matchindexes, length, argument ) {
 			return [ argument < 0 ? argument + length : argument ];
 		}),
 
-		"even": createPositionalPseudo(function( matchIndexes, length ) {
+		"even": createPositionalPseudo(function( matchindexes, length ) {
 			var i = 0;
 			for ( ; i < length; i += 2 ) {
-				matchIndexes.push( i );
+				matchindexes.push( i );
 			}
-			return matchIndexes;
+			return matchindexes;
 		}),
 
-		"odd": createPositionalPseudo(function( matchIndexes, length ) {
+		"odd": createPositionalPseudo(function( matchindexes, length ) {
 			var i = 1;
 			for ( ; i < length; i += 2 ) {
-				matchIndexes.push( i );
+				matchindexes.push( i );
 			}
-			return matchIndexes;
+			return matchindexes;
 		}),
 
-		"lt": createPositionalPseudo(function( matchIndexes, length, argument ) {
+		"lt": createPositionalPseudo(function( matchindexes, length, argument ) {
 			var i = argument < 0 ? argument + length : argument;
 			for ( ; --i >= 0; ) {
-				matchIndexes.push( i );
+				matchindexes.push( i );
 			}
-			return matchIndexes;
+			return matchindexes;
 		}),
 
-		"gt": createPositionalPseudo(function( matchIndexes, length, argument ) {
+		"gt": createPositionalPseudo(function( matchindexes, length, argument ) {
 			var i = argument < 0 ? argument + length : argument;
 			for ( ; ++i < length; ) {
-				matchIndexes.push( i );
+				matchindexes.push( i );
 			}
-			return matchIndexes;
+			return matchindexes;
 		})
 	}
 };
@@ -3077,7 +3077,7 @@ jQuery.fn.extend( {
 			return ( this[ 0 ] && this[ 0 ].parentNode ) ? this.first().prevAll().length : -1;
 		}
 
-		// Index in selector
+		// index in selector
 		if ( typeof elem === "string" ) {
 			return indexOf.call( jQuery( elem ), this[ 0 ] );
 		}
@@ -3248,8 +3248,8 @@ jQuery.Callbacks = function( options ) {
 		// Queue of execution data for repeatable lists
 		queue = [],
 
-		// Index of currently firing callback (modified by add/remove as needed)
-		firingIndex = -1,
+		// index of currently firing callback (modified by add/remove as needed)
+		firingindex = -1,
 
 		// Fire callbacks
 		fire = function() {
@@ -3258,18 +3258,18 @@ jQuery.Callbacks = function( options ) {
 			locked = locked || options.once;
 
 			// Execute callbacks for all pending executions,
-			// respecting firingIndex overrides and runtime changes
+			// respecting firingindex overrides and runtime changes
 			fired = firing = true;
-			for ( ; queue.length; firingIndex = -1 ) {
+			for ( ; queue.length; firingindex = -1 ) {
 				memory = queue.shift();
-				while ( ++firingIndex < list.length ) {
+				while ( ++firingindex < list.length ) {
 
 					// Run callback and check for early termination
-					if ( list[ firingIndex ].apply( memory[ 0 ], memory[ 1 ] ) === false &&
+					if ( list[ firingindex ].apply( memory[ 0 ], memory[ 1 ] ) === false &&
 						options.stopOnFalse ) {
 
 						// Jump to end and forget the data so .add doesn't re-fire
-						firingIndex = list.length;
+						firingindex = list.length;
 						memory = false;
 					}
 				}
@@ -3305,7 +3305,7 @@ jQuery.Callbacks = function( options ) {
 
 					// If we have memory from a past run, we should fire after adding
 					if ( memory && !firing ) {
-						firingIndex = list.length - 1;
+						firingindex = list.length - 1;
 						queue.push( memory );
 					}
 
@@ -3338,8 +3338,8 @@ jQuery.Callbacks = function( options ) {
 						list.splice( index, 1 );
 
 						// Handle firing indexes
-						if ( index <= firingIndex ) {
-							firingIndex--;
+						if ( index <= firingindex ) {
+							firingindex--;
 						}
 					}
 				} );
@@ -6197,7 +6197,7 @@ function curCSS( elem, name, computed ) {
 	return ret !== undefined ?
 
 		// Support: IE <=9 - 11 only
-		// IE returns zIndex value as an integer.
+		// IE returns zindex value as an integer.
 		ret + "" :
 		ret;
 }
@@ -6429,7 +6429,7 @@ jQuery.extend( {
 		"order": true,
 		"orphans": true,
 		"widows": true,
-		"zIndex": true,
+		"zindex": true,
 		"zoom": true
 	},
 
@@ -7499,7 +7499,7 @@ jQuery.fn.delay = function( time, type ) {
 	support.checkOn = input.value !== "";
 
 	// Support: IE <=11 only
-	// Must access selectedIndex to make default options select
+	// Must access selectedindex to make default options select
 	support.optSelected = opt.selected;
 
 	// Support: IE <=11 only
@@ -7692,11 +7692,11 @@ jQuery.extend( {
 	},
 
 	propHooks: {
-		tabIndex: {
+		tabindex: {
 			get: function( elem ) {
 
 				// Support: IE <=9 - 11 only
-				// elem.tabIndex doesn't always return the
+				// elem.tabindex doesn't always return the
 				// correct value when it hasn't been explicitly set
 				// https://web.archive.org/web/20141116233347/http://fluidproject.org/blog/2008/01/09/getting-setting-and-removing-tabindex-values-with-javascript/
 				// Use proper attribute retrieval(#12072)
@@ -7726,7 +7726,7 @@ jQuery.extend( {
 } );
 
 // Support: IE <=11 only
-// Accessing the selectedIndex property
+// Accessing the selectedindex property
 // forces the browser to respect setting selected
 // on the option
 // The getter ensures a default option is selected
@@ -7741,7 +7741,7 @@ if ( !support.optSelected ) {
 
 			var parent = elem.parentNode;
 			if ( parent && parent.parentNode ) {
-				parent.parentNode.selectedIndex;
+				parent.parentNode.selectedindex;
 			}
 			return null;
 		},
@@ -7751,10 +7751,10 @@ if ( !support.optSelected ) {
 
 			var parent = elem.parentNode;
 			if ( parent ) {
-				parent.selectedIndex;
+				parent.selectedindex;
 
 				if ( parent.parentNode ) {
-					parent.parentNode.selectedIndex;
+					parent.parentNode.selectedindex;
 				}
 			}
 		}
@@ -7762,7 +7762,7 @@ if ( !support.optSelected ) {
 }
 
 jQuery.each( [
-	"tabIndex",
+	"tabindex",
 	"readOnly",
 	"maxLength",
 	"cellSpacing",
@@ -8055,7 +8055,7 @@ jQuery.extend( {
 			get: function( elem ) {
 				var value, option, i,
 					options = elem.options,
-					index = elem.selectedIndex,
+					index = elem.selectedindex,
 					one = elem.type === "select-one",
 					values = one ? null : [],
 					max = one ? index + 1 : options.length;
@@ -8118,7 +8118,7 @@ jQuery.extend( {
 
 				// Force browsers to behave consistently when non-matching value is set
 				if ( !optionSet ) {
-					elem.selectedIndex = -1;
+					elem.selectedindex = -1;
 				}
 				return values;
 			}

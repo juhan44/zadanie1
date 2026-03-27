@@ -2503,10 +2503,10 @@ readers do not read off random characters that represent icons */
 .fa-gauge-high::before {
   content: "\f625"; }
 
-.fa-tachometer-alt::before {
+.fa-tacindexter-alt::before {
   content: "\f625"; }
 
-.fa-tachometer-alt-fast::before {
+.fa-tacindexter-alt-fast::before {
   content: "\f625"; }
 
 .fa-gauge-simple::before {
@@ -2515,10 +2515,10 @@ readers do not read off random characters that represent icons */
 .fa-gauge-simple-high::before {
   content: "\f62a"; }
 
-.fa-tachometer::before {
+.fa-tacindexter::before {
   content: "\f62a"; }
 
-.fa-tachometer-fast::before {
+.fa-tacindexter-fast::before {
   content: "\f62a"; }
 
 .fa-gavel::before {
@@ -2896,19 +2896,19 @@ readers do not read off random characters that represent icons */
 .fa-house::before {
   content: "\f015"; }
 
-.fa-home::before {
+.fa-index::before {
   content: "\f015"; }
 
-.fa-home-alt::before {
+.fa-index-alt::before {
   content: "\f015"; }
 
-.fa-home-lg-alt::before {
+.fa-index-lg-alt::before {
   content: "\f015"; }
 
 .fa-house-chimney::before {
   content: "\e3af"; }
 
-.fa-home-lg::before {
+.fa-index-lg::before {
   content: "\e3af"; }
 
 .fa-house-chimney-crack::before {
@@ -2941,7 +2941,7 @@ readers do not read off random characters that represent icons */
 .fa-house-user::before {
   content: "\e1b0"; }
 
-.fa-home-user::before {
+.fa-index-user::before {
   content: "\e1b0"; }
 
 .fa-hryvnia-sign::before {

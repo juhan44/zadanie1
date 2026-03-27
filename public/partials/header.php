@@ -1,3 +1,7 @@
+<?php
+    require "../app/functions.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +12,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
-    <title>Designer HTML5 Template - About Page</title>
+    <title><?php echo Filename(); ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -63,7 +67,7 @@ https://templatemo.com/tm-572-designer
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="index.php">Homepage</a>
+                  <a class="nav-link" href="index.php">homepage</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link active" href="about.php">About Us</a>
