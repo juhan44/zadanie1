@@ -1,5 +1,5 @@
 <?php
-    include "partials/header.php";
+    include "../templates/partials/header.php";
 ?>
 
   <div class="main-banner change-name">
@@ -305,5 +305,5 @@
 
 
 <?php
-    include "partials/footer.php"
+    include "../templates/partials/footer.php"
 ?>

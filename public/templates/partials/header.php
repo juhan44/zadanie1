@@ -1,5 +1,5 @@
 <?php
-    require "../app/functions.php";
+    require "../../app/functions.php";
 ?>
 
 <!DOCTYPE html>
@@ -19,10 +19,10 @@
 
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-572-designer.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="../assets/css/fontawesome.css">
+    <link rel="stylesheet" href="../assets/css/templatemo-572-designer.css">
+    <link rel="stylesheet" href="../assets/css/owl.css">
+    <link rel="stylesheet" href="../assets/css/animate.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 <!--
 
@@ -67,7 +67,7 @@ https://templatemo.com/tm-572-designer
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="index.php">homepage</a>
+                  <a class="nav-link" href="home.php">homepage</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link active" href="about.php">About Us</a>

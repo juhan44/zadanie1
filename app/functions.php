@@ -9,4 +9,8 @@ function Filename() {
     return $title;
 }
 
+   function redirect(string $url):void{
+        header('Location: '.$url);
+        exit(); 
+    }
 ?>
